@@ -2,7 +2,7 @@ package electricity;
 
 public class Particle {
 	// Define physical constants.
-	private static final double K = 9 * Math.pow(10, 9);
+	public static final double K = 9 * Math.pow(10, 9);
 
 	// Physical properties of the particle.
 	private double charge; // in coulombs

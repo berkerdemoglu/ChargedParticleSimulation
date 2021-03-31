@@ -1,9 +1,6 @@
 package electricity;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class ParticleSystem {
 	private ArrayList<Particle> particles;
@@ -17,7 +14,7 @@ public class ParticleSystem {
 	}
 
 	public double getPotentialEnergy() {
-		double potentialEnergy = 0;
+		double totalPotentialEnergy = 0;
 		HashSet<HashSet<Particle>> combinations = new HashSet<>();
 		HashSet<Particle> combination;
 		Particle otherP;
@@ -34,9 +31,19 @@ public class ParticleSystem {
 			}
 		}
 
-		System.out.println(combinations);
+		Particle p1;
+		Particle p2;
+		Iterator<Particle> iterator;
+		double potentialEnergy;
+		for (HashSet<Particle> interaction: combinations) {
+			iterator = interaction.iterator();
+			p1 = iterator.next();
+			p2 = iterator.next();
+			potentialEnergy = (Particle.K * p1.getCharge() * p2.getCharge()) / (Utils.calcDistance(p1, p2));
+			totalPotentialEnergy += potentialEnergy;
+		}
 
-		return potentialEnergy;
+		return totalPotentialEnergy;
 	}
 
 	public boolean addParticle(Particle particle) {
