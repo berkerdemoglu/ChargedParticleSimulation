@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Electricity.iml" filepath="$PROJECT_DIR$/Electricity.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ChargedParticleSimulation.iml" filepath="$PROJECT_DIR$/ChargedParticleSimulation.iml" />
     </modules>
   </component>
 </project>
