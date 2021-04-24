@@ -1,13 +1,13 @@
 package electricity;
 
-public class Main {
-	public static void main(String[] args) {
-		ParticleSystem system = new ParticleSystem();
-		system.addParticle(new Particle());
-		system.addParticle(new Particle(-2.0, 6, 8));
-		system.addParticle(new Particle(3.0, 5, 12));
-		system.addParticle(new Particle(2, 6, 0));
-		System.out.println(system);
-		System.out.println(system.getPotentialEnergy());
+public final class Main {
+	public static void main(final String[] args) {
+		final ParticleSystem particleSystem = new ParticleSystem();
+		particleSystem.addParticle(new Particle());
+		particleSystem.addParticle(new Particle(-2.0, 6, 8));
+		particleSystem.addParticle(new Particle(3.0, 5, 12));
+		particleSystem.addParticle(new Particle(2, 6, 0));
+		System.out.println(particleSystem);
+		System.out.println(particleSystem.getPotentialEnergy());
 	}
 }

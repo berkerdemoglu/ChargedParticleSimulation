@@ -1,74 +1,64 @@
 package electricity;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 
-public class ParticleSystem {
-	private ArrayList<Particle> particles;
+public final class ParticleSystem {
+	private final ArrayList<Particle> particles;
 
 	public ParticleSystem() {
-		particles = new ArrayList<>();
+		this(new ArrayList<>());
 	}
 
-	public ParticleSystem(ArrayList<Particle> particles) {
+	public ParticleSystem(final ArrayList<Particle> particles) {
 		this.particles = particles;
 	}
 
 	public double getPotentialEnergy() {
-		double totalPotentialEnergy = 0;
-		HashSet<HashSet<Particle>> combinations = new HashSet<>();
-		HashSet<Particle> combination;
-		Particle otherP;
+		final HashSet<HashSet<Particle>> combinations = new HashSet<>();
 
-		for (Particle p: particles) {
-			for (int i = 0; i < particles.size(); i++) {
-				combination = new HashSet<>();
-				otherP = particles.get(i);
-				if (otherP != p) {
+		for (final Particle p: particles) {
+			for (final Particle particle : particles) {
+				final HashSet<Particle> combination = new HashSet<>();
+				if (particle != p) {
 					combination.add(p);
-					combination.add(otherP);
+					combination.add(particle);
 					combinations.add(combination);
 				}
 			}
 		}
 
-		Particle p1;
-		Particle p2;
-		Iterator<Particle> iterator;
-		double potentialEnergy;
-		for (HashSet<Particle> interaction: combinations) {
-			iterator = interaction.iterator();
-			p1 = iterator.next();
-			p2 = iterator.next();
-			potentialEnergy = (Particle.K * p1.getCharge() * p2.getCharge()) / (Utils.calcDistance(p1, p2));
+
+		double totalPotentialEnergy = 0;
+
+		for (final HashSet<Particle> interaction: combinations) {
+			final Iterator<Particle> iterator = interaction.iterator();
+			final Particle p1 = iterator.next();
+			final Particle p2 = iterator.next();
+			final double potentialEnergy = (Particle.CONSTANT_K * p1.getCharge() * p2.getCharge()) / (Utils.calcDistance(p1, p2));
 			totalPotentialEnergy += potentialEnergy;
 		}
 
 		return totalPotentialEnergy;
 	}
 
-	public boolean addParticle(Particle particle) {
-		// Check if particle is being placed on the same location as another particle.
-		boolean unique = true;
+	// Check if particle is being placed on the same location as another particle.
+	public boolean addParticle(final Particle particle) {
 
 		// Check particle's x and y coordinates.
-		for (Particle p: particles) {
-			unique = (p.getX() != particle.getX() || p.getY() != particle.getY());
-			if (!unique) {
-				break;
+		for (final Particle p: particles) {
+			if (!(p.getX() != particle.getX() || p.getY() != particle.getY())) {
+				return false;
 			}
 		}
 
-		if (unique) {
-			particles.add(particle);
-		}
-		return unique;
+		particles.add(particle);
+		return true;
 	}
 
+	@Override
 	public String toString() {
 		return particles.toString();
-	}
-
-	public ArrayList<Particle> getParticles() {
-		return particles;
 	}
 }

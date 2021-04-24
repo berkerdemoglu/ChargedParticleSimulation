@@ -1,23 +1,23 @@
 package electricity;
 
-public class Particle {
+public final class Particle {
 	// Define physical constants.
-	public static final double K = 9 * Math.pow(10, 9);
+	public static final double CONSTANT_K = 9 * Math.pow(10, 9);
 
 	// Physical properties of the particle.
-	private double charge; // in coulombs
+	private final double charge; // in coulombs
 
 	// X and Y coordinates of the particle
-	private int x;
-	private int y;
+	private final int x;
+	private final int y;
 
-	public Particle(double charge,  int x, int y) {
-		setCharge(charge);
-		setX(x);
-		setY(y);
+	public Particle(final double charge, final int x, final int y) {
+		this.charge = charge;
+		this.x = x;
+		this.y = y;
 	}
 
-	public Particle(int x, int y) {
+	public Particle(final int x, final int y) {
 		// +1C at (x,y)
 		this(1.0, x, y);
 	}
@@ -27,34 +27,20 @@ public class Particle {
 		this(0 , 0);
 	}
 
+	@Override
 	public String toString() {
-		StringBuilder repr = new StringBuilder("(charge:");
-		repr.append(charge).append(", x:").append(x).append(", y:").append(y).append(")");
-
-		return repr.toString();
+		return "(charge:" + charge + ", x:" + x + ", y:" + y + ")";
 	}
 
 	public double getCharge() {
 		return charge;
 	}
 
-	public void setCharge(double charge) {
-		this.charge = charge;
-	}
-
 	public int getX() {
 		return x;
 	}
 
-	public void setX(int x) {
-		this.x = x;
-	}
-
 	public int getY() {
 		return y;
-	}
-
-	public void setY(int y) {
-		this.y = y;
 	}
 }
