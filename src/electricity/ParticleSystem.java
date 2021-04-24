@@ -43,17 +43,23 @@ public final class ParticleSystem {
 		return totalPotentialEnergy;
 	}
 
-	// Check if particle is being placed on the same location as another particle.
-	public boolean addParticle(final Particle particle) {
+	public void addParticle(final Particle particle) {
 
+		if (this.checkSameLocation(particle)) {
+			return;
+		}
+
+		particles.add(particle);
+	}
+
+	// Check if particle is being placed on the same location as another particle.
+	private boolean checkSameLocation(final Particle particle) {
 		// Check particle's x and y coordinates.
 		for (final Particle p: particles) {
 			if (!(p.getX() != particle.getX() || p.getY() != particle.getY())) {
 				return false;
 			}
 		}
-
-		particles.add(particle);
 		return true;
 	}
 
